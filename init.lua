@@ -128,6 +128,17 @@ vim.api.nvim_create_autocmd('Filetype', {
   end,
 })
 
+--SQL/PostgreSQL specific settings
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('sql_settings', { clear = true }),
+  pattern = { 'sql', 'psql' },
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
+    vim.bo.expandtab = true
+  end,
+})
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
