@@ -116,6 +116,18 @@ vim.o.shiftwidth = 2 -- Number of spaces to use for autoindent
 vim.o.softtabstop = 2 -- Number of spaces a tab counts for while editing
 vim.o.expandtab = true -- Use spaces instead of tabs
 
+--Filetype specific indentation
+vim.api.nvim_create_autocmd('Filetype', {
+  group = vim.api.nvim_create_augroup('filetype_indent', { clear = true }),
+  pattern = { 'python', 'lua' },
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+    vim.bo.softtabstop = 4
+    vim.bo.expandtab = true
+  end,
+})
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
