@@ -139,6 +139,57 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.expandtab = true
   end,
 })
+
+--Make line numbers default
+vim.o.number = true
+-- Relative numbers for easier navigation
+vim.o.relativenumber = true
+
+--Enable mouse mode
+vim.o.mouse = 'a'
+
+-- Sync clipboard
+vim.schedule(function()
+  vim.o.clipboard = 'unamedplus'
+end)
+
+-- Enable break indent
+vim.o.breakindent = true
+
+-- Save undo history
+vim.o.undofile = true
+
+-- Case-insensitive searching
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+-- Keep signcolumn on by default
+vim.o.signcolumn = 'yes'
+
+-- Decrease update time
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.o.splitright = true
+vim.o.splitbelow = true
+
+-- Show whitespace characters
+vim.o.list = true
+vim.opt.listchars = { tab = '>> ', trail = '.', nbsp = ' ' }
+
+-- Preview substitution live
+vim.o.incommand = 'split'
+
+-- Show which line your cursor is on
+vim.o.cursorline = true
+
+-- Minimal number of screen lines to keep above and below the cursor
+vim.o.scrolloff = 10
+
+-- Confirm before quitting with unsaved changes
+vim.o.confirm = true
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
