@@ -384,7 +384,7 @@ require('lazy').setup({
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- Language servers for your stack
+      -- Language servers for your stack (LSP config names)
       local servers = {
         tsserver = {
           init_options = {
@@ -425,13 +425,38 @@ require('lazy').setup({
         cssls = {},
       }
 
+      -- CORRECTED: Mason package names (these are DIFFERENT from LSP server names!)
       require('mason-tool-installer').setup {
-        ensure_installed = vim.tbl_keys(servers or {}),
+        ensure_installed = {
+          -- LSP servers
+          'typescript-language-server', -- For tsserver
+          'pyright', -- For Python (this one is correct)
+          'lua-language-server', -- For lua_ls
+          'sqlls', -- For SQL (this one is correct)
+          'json-lsp', -- For jsonls
+          'html-lsp', -- For html
+          'css-lsp', -- For cssls
+          -- Formatters & linters
+          'prettierd',
+          'stylua',
+          'black',
+          'isort',
+          'sqlfmt',
+          'eslint_d',
+        },
       }
 
       require('mason-lspconfig').setup {
-        ensure_installed = {},
-        automatic_installation = false,
+        ensure_installed = {
+          'tsserver', -- LSP config name, not Mason package name
+          'pyright',
+          'lua_ls',
+          'sqlls',
+          'jsonls',
+          'html',
+          'cssls',
+        },
+        automatic_installation = true, -- Changed to true for auto-install
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -442,7 +467,6 @@ require('lazy').setup({
       }
     end,
   },
-
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
