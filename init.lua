@@ -448,7 +448,7 @@ require('lazy').setup({
 
       require('mason-lspconfig').setup {
         ensure_installed = {
-          'tsserver', -- LSP config name, not Mason package name
+          'ts_ls', -- Replaced "tsserver" with "ts_ls"
           'pyright',
           'lua_ls',
           'sqlls',
@@ -1045,7 +1045,7 @@ require('lazy').setup({
 
       -- Language servers for your stack
       local servers = {
-        tsserver = {
+        ts_ls = {
           init_options = {
             preferences = {
               includeCompletionsForModuleExports = true,
